@@ -677,23 +677,66 @@
             margin-top: 16px;
         }
 
+        /* Auto-scroll carousel container */
+        .products-carousel {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .products-carousel::before,
+        .products-carousel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .products-carousel::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-primary) 0%, transparent 100%);
+        }
+
+        .products-carousel::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);
+        }
+
         .products-scroll {
             display: flex;
             gap: 30px;
-            padding: 40px 60px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            cursor: grab;
+            padding: 0 30px;
+            animation: scrollProducts 30s linear infinite;
+            width: max-content;
         }
 
-        .products-scroll::-webkit-scrollbar {
-            display: none;
+        .products-scroll:hover {
+            animation-play-state: paused;
         }
 
-        .products-scroll:active {
-            cursor: grabbing;
+        @keyframes scrollProducts {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Touch/mobile: allow manual scroll */
+        @media (max-width: 768px) {
+            .products-carousel::before,
+            .products-carousel::after {
+                width: 40px;
+            }
+
+            .products-scroll {
+                animation: scrollProducts 20s linear infinite;
+            }
         }
 
         .product-card {
@@ -1889,8 +1932,9 @@
             <p class="products-subtitle">Swipe to explore our delicious collection</p>
         </div>
 
-        <div class="products-scroll">
-            <div class="product-card mango animate-on-scroll">
+        <div class="products-carousel">
+            <div class="products-scroll">
+                <div class="product-card mango">
                 <div class="product-badge">Popular</div>
                 <div class="product-image">
                     <img src="ALPHONSO MANGO FRUIT PULP.png" alt="Alphonso Mango Fruit Pulp">
@@ -1899,7 +1943,7 @@
                 <p class="product-desc">The king of mangoes, frozen at peak ripeness</p>
             </div>
 
-            <div class="product-card avocado animate-on-scroll delay-1">
+            <div class="product-card avocado">
                 <div class="product-image">
                     <img src="avocado.png" alt="Avocado Fruit Pulp">
                 </div>
@@ -1907,7 +1951,7 @@
                 <p class="product-desc">Creamy, rich, perfect for smoothie bowls</p>
             </div>
 
-            <div class="product-card strawberry animate-on-scroll delay-2">
+            <div class="product-card strawberry">
                 <div class="product-badge">New</div>
                 <div class="product-image">
                     <img src="STRAWBERRY FRUIT PULP.png" alt="Strawberry Fruit Pulp">
@@ -1916,7 +1960,7 @@
                 <p class="product-desc">Sweet berries bursting with flavor</p>
             </div>
 
-            <div class="product-card pineapple animate-on-scroll delay-3">
+            <div class="product-card pineapple">
                 <div class="product-image">
                     <img src="PINEAPPLE FRUIT PULP.png" alt="Pineapple Fruit Pulp">
                 </div>
@@ -1924,7 +1968,7 @@
                 <p class="product-desc">Tropical sunshine in every cube</p>
             </div>
 
-            <div class="product-card orange animate-on-scroll delay-4">
+            <div class="product-card orange">
                 <div class="product-image">
                     <img src="ORANGE PULP.png" alt="Orange Fruit Pulp">
                 </div>
@@ -1932,7 +1976,7 @@
                 <p class="product-desc">Zesty citrus freshness, always ready</p>
             </div>
 
-            <div class="product-card grape animate-on-scroll delay-5">
+            <div class="product-card grape">
                 <div class="product-image">
                     <img src="GRAPE FRUIT PULP.png" alt="Grape Fruit Pulp">
                 </div>
@@ -1940,7 +1984,7 @@
                 <p class="product-desc">Deep, rich grape intensity</p>
             </div>
 
-            <div class="product-card passion animate-on-scroll">
+            <div class="product-card passion">
                 <div class="product-image">
                     <img src="PASSION FRUIT PULP.png" alt="Passion Fruit Pulp">
                 </div>
@@ -1948,7 +1992,7 @@
                 <p class="product-desc">Exotic tang with aromatic notes</p>
             </div>
 
-            <div class="product-card sapota animate-on-scroll delay-1">
+            <div class="product-card sapota">
                 <div class="product-image">
                     <img src="SAPOTA PULP.png" alt="Sapota Fruit Pulp">
                 </div>
@@ -1956,12 +2000,13 @@
                 <p class="product-desc">Caramel-sweet tropical delight</p>
             </div>
 
-            <div class="product-card coconut animate-on-scroll delay-2">
+            <div class="product-card coconut">
                 <div class="product-image">
                     <img src="TENDER COCONUT FRUIT PULP.png" alt="Tender Coconut Fruit Pulp">
                 </div>
                 <h3 class="product-name">Tender Coconut</h3>
                 <p class="product-desc">Refreshing island essence</p>
+            </div>
             </div>
         </div>
     </section>
@@ -3037,33 +3082,16 @@
             });
         });
 
-        // Products horizontal scroll drag
+        // Products auto-scroll: duplicate cards for seamless infinite loop
         const productsScroll = document.querySelector('.products-scroll');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        productsScroll.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - productsScroll.offsetLeft;
-            scrollLeft = productsScroll.scrollLeft;
-        });
-
-        productsScroll.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        productsScroll.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        productsScroll.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - productsScroll.offsetLeft;
-            const walk = (x - startX) * 2;
-            productsScroll.scrollLeft = scrollLeft - walk;
-        });
+        if (productsScroll) {
+            const productCards = productsScroll.querySelectorAll('.product-card');
+            // Clone all cards and append for seamless infinite scroll
+            productCards.forEach(card => {
+                const clone = card.cloneNode(true);
+                productsScroll.appendChild(clone);
+            });
+        }
 
         // Recipe Category Filtering
         const categoryTabs = document.querySelectorAll('.category-tab');
