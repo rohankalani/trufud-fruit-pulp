@@ -1461,45 +1461,54 @@
             background: linear-gradient(135deg, var(--bg-card), #1a1a2e);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transform: rotateY(180deg);
-            padding: 30px;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         .recipe-back h4 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin: 0 0 12px 0;
+            padding-bottom: 10px;
             color: var(--accent-gold);
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .ingredients-list {
             list-style: none;
             flex: 1;
+            overflow-y: auto;
         }
 
         .ingredients-list li {
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             transition: all 0.3s ease;
+        }
+
+        .ingredients-list li:last-child {
+            border-bottom: none;
         }
 
         .ingredients-list li:hover {
             color: var(--text-primary);
-            padding-left: 10px;
+            padding-left: 8px;
         }
 
         .ingredients-list li::before {
             content: '🧊';
-            font-size: 1rem;
+            font-size: 0.9rem;
+            flex-shrink: 0;
         }
 
         .trufud-cubes {
