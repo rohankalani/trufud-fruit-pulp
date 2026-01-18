@@ -1,0 +1,3022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUFUD | Frozen Fruit Pulp - Reinvented</title>
+    <meta name="description" content="Revolutionary frozen fruit pulp in convenient snap-off cubes. 100% Natural, No Preservatives. 9 exotic flavors.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           CSS VARIABLES
+        ═══════════════════════════════════════════════════════════ */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-darker: #050508;
+            --bg-card: #12121a;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.4);
+
+            --accent-gold: #FFD700;
+            --accent-green: #00D26A;
+            --accent-glow: rgba(0, 210, 106, 0.3);
+
+            /* Fruit Colors */
+            --mango: linear-gradient(135deg, #FFB347, #FF8C00);
+            --strawberry: linear-gradient(135deg, #FF6B6B, #EE4B4B);
+            --avocado: linear-gradient(135deg, #9ACD32, #6B8E23);
+            --pineapple: linear-gradient(135deg, #FFE135, #FFC300);
+            --orange: linear-gradient(135deg, #FF7F50, #FF6347);
+            --grape: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            --passion: linear-gradient(135deg, #FF9F43, #EE5A24);
+            --sapota: linear-gradient(135deg, #D2691E, #A0522D);
+            --coconut: linear-gradient(135deg, #F5F5DC, #D4D4AA);
+
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESET & BASE
+        ═══════════════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           ANIMATIONS
+        ═══════════════════════════════════════════════════════════ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        @keyframes floatDelayed {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(-2deg); }
+        }
+
+        @keyframes cubeEscape {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(100px, -80px) rotate(45deg); opacity: 1; }
+            100% { transform: translate(200px, 50px) rotate(90deg); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes rotateIn {
+            from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+            to { opacity: 1; transform: rotate(0deg) scale(1); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+            50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 60px var(--accent-glow); }
+        }
+
+        /* Animation utility classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* ═══════════════════════════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10,10,15,0.9) 0%, transparent 100%);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            padding: 15px 60px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           HERO SECTION
+        ═══════════════════════════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, var(--bg-dark) 70%);
+            padding-top: 100px;
+        }
+
+        /* Animated background gradient */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(0, 210, 106, 0.03) 60deg,
+                transparent 120deg,
+                rgba(255, 215, 0, 0.03) 180deg,
+                transparent 240deg,
+                rgba(0, 210, 106, 0.03) 300deg,
+                transparent 360deg
+            );
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        /* Product Showcase Grid in Hero */
+        .product-showcase-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            perspective: 1000px;
+            flex-wrap: wrap;
+            max-width: 800px;
+        }
+
+        .showcase-product {
+            width: 120px;
+            height: 160px;
+            animation: float 4s ease-in-out infinite;
+            position: relative;
+            transition: all 0.4s var(--transition-smooth);
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+        }
+
+        .showcase-product img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .showcase-product:hover {
+            transform: scale(1.15) translateY(-10px);
+            filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
+        }
+
+        .showcase-product:nth-child(1) { animation-delay: 0s; }
+        .showcase-product:nth-child(2) { animation-delay: 0.15s; }
+        .showcase-product:nth-child(3) { animation-delay: 0.3s; }
+        .showcase-product:nth-child(4) { animation-delay: 0.45s; }
+        .showcase-product:nth-child(5) { animation-delay: 0.6s; }
+        .showcase-product:nth-child(6) { animation-delay: 0.75s; }
+        .showcase-product:nth-child(7) { animation-delay: 0.9s; }
+        .showcase-product:nth-child(8) { animation-delay: 1.05s; }
+        .showcase-product:nth-child(9) { animation-delay: 1.2s; }
+
+        /* Old cube styles kept for reference */
+        .cube-grid { display: none; }
+        .cube { display: none; }
+        .cube:nth-child(3) { animation-delay: 0.4s; background: var(--mango); }
+        .cube:nth-child(4) { animation-delay: 0.6s; background: var(--mango); }
+        .cube:nth-child(5) { animation-delay: 0.3s; background: var(--mango); }
+        .cube:nth-child(6) { animation-delay: 0.5s; background: var(--mango); }
+        .cube:nth-child(7) { animation-delay: 0.7s; background: var(--mango); }
+        .cube:nth-child(8) { animation-delay: 0.1s; background: var(--mango); }
+        .cube:nth-child(9) { animation-delay: 0.4s; background: var(--mango); }
+        .cube:nth-child(10) { animation-delay: 0.6s; background: var(--mango); }
+        .cube:nth-child(11) { animation-delay: 0.2s; background: var(--mango); }
+        .cube:nth-child(12) { animation-delay: 0.8s; background: var(--mango); }
+
+        /* The escaping cube */
+        .cube.escape {
+            animation: cubeEscape 3s ease-in-out infinite;
+            z-index: 20;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 24px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-size: 13px;
+            color: var(--accent-green);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 10vw, 100px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-tagline strong {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.4s var(--transition-bounce);
+            box-shadow: 0 10px 40px rgba(0, 210, 106, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 210, 106, 0.4);
+        }
+
+        .hero-cta svg {
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        .scroll-indicator {
+            position: relative;
+            margin-top: 60px;
+            display: flex;
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--text-muted), transparent);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           INNOVATION SECTION
+        ═══════════════════════════════════════════════════════════ */
+        .innovation {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 60px;
+            background: var(--bg-darker);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .innovation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        .innovation-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .innovation-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--accent-green);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 6vw, 60px);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .innovation-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .innovation-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .innovation-content {
+            padding: 40px;
+        }
+
+        .innovation-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--accent-gold);
+        }
+
+        .innovation-content p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-glass);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           HOW IT WORKS SECTION
+        ═══════════════════════════════════════════════════════════ */
+        .how-it-works {
+            min-height: 100vh;
+            padding: 120px 60px;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .how-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .how-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            position: relative;
+        }
+
+        /* Connection line */
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                var(--accent-green),
+                var(--accent-gold),
+                var(--accent-green)
+            );
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: var(--bg-card);
+            border: 2px solid var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--accent-green);
+            position: relative;
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .step:hover .step-number {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            transform: scale(1.1);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .step-icon {
+            font-size: 60px;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .step h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           PRODUCTS SECTION
+        ═══════════════════════════════════════════════════════════ */
+        .products {
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            overflow: hidden;
+        }
+
+        .products-header {
+            text-align: center;
+            padding: 0 60px;
+            margin-bottom: 60px;
+        }
+
+        .products-subtitle {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-top: 16px;
+        }
+
+        .products-scroll {
+            display: flex;
+            gap: 30px;
+            padding: 40px 60px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+        }
+
+        .products-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .products-scroll:active {
+            cursor: grabbing;
+        }
+
+        .product-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 24px 24px 0 0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Product-specific gradient tops */
+        .product-card.mango::before { background: var(--mango); }
+        .product-card.strawberry::before { background: var(--strawberry); }
+        .product-card.avocado::before { background: var(--avocado); }
+        .product-card.pineapple::before { background: var(--pineapple); }
+        .product-card.orange::before { background: var(--orange); }
+        .product-card.grape::before { background: var(--grape); }
+        .product-card.passion::before { background: var(--passion); }
+        .product-card.sapota::before { background: var(--sapota); }
+        .product-card.coconut::before { background: var(--coconut); }
+
+        .product-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .product-image img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            transition: transform 0.4s var(--transition-smooth);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .product-emoji {
+            font-size: 80px;
+            display: block;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BENEFITS SECTION
+        ═══════════════════════════════════════════════════════════ */
+        .benefits {
+            padding: 120px 60px;
+            background: var(--bg-darker);
+            position: relative;
+        }
+
+        .benefits::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: var(--bg-glass);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 210, 106, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 210, 106, 0.3);
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 24px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: all 0.4s var(--transition-bounce);
+        }
+
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--accent-green);
+        }
+
+        .benefit-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .benefit-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           CTA SECTION
+        ═══════════════════════════════════════════════════════════ */
+        .cta-section {
+            padding: 150px 60px;
+            background: linear-gradient(135deg, #0f2318 0%, var(--bg-dark) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .cta-content p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.4s var(--transition-bounce);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════════════════════ */
+        footer {
+            background: var(--bg-darker);
+            padding: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-brand .logo-text {
+            font-size: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-glass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-social a:hover {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero, .innovation, .how-it-works, .benefits, .cta-section {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .innovation-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .innovation-visual {
+                height: 350px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .steps-grid::before {
+                display: none;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-scroll {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cube-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
+            .cube {
+                width: 50px;
+                height: 50px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-card {
+                flex: 0 0 260px;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RECIPES SECTION
+        ═══════════════════════════════════════════════════════════ */
+        .recipes-section {
+            padding: 120px 5%;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0d0d15 50%, var(--bg-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recipes-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .recipes-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .recipes-header .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #FF6B6B;
+            margin-bottom: 20px;
+        }
+
+        .recipes-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #FF6B6B 50%, #FFB347 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .recipes-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Category Tabs */
+        .recipe-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .category-tab {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s var(--transition-smooth);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--cat-color-1, #FF6B6B), var(--cat-color-2, #FFB347));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .category-tab span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-tab:hover {
+            transform: translateY(-3px);
+            border-color: transparent;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+        }
+
+        .category-tab:hover::before {
+            opacity: 0.2;
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, var(--cat-color-1, #FF6B6B), var(--cat-color-2, #FFB347));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.4);
+            transform: scale(1.05);
+        }
+
+        .category-tab.active::before {
+            opacity: 0;
+        }
+
+        /* Category Colors */
+        .category-tab[data-category="smoothies"] { --cat-color-1: #FF6B6B; --cat-color-2: #FF8E8E; }
+        .category-tab[data-category="cocktails"] { --cat-color-1: #8B5CF6; --cat-color-2: #A78BFA; }
+        .category-tab[data-category="mocktails"] { --cat-color-1: #06B6D4; --cat-color-2: #22D3EE; }
+        .category-tab[data-category="juices"] { --cat-color-1: #F59E0B; --cat-color-2: #FBBF24; }
+        .category-tab[data-category="desserts"] { --cat-color-1: #EC4899; --cat-color-2: #F472B6; }
+        .category-tab[data-category="breakfast"] { --cat-color-1: #10B981; --cat-color-2: #34D399; }
+        .category-tab[data-category="healthy"] { --cat-color-1: #22C55E; --cat-color-2: #86EFAC; }
+
+        /* Recipe Grid */
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Recipe Card */
+        .recipe-card {
+            perspective: 1000px;
+            height: 420px;
+            cursor: pointer;
+        }
+
+        .recipe-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s var(--transition-smooth);
+            transform-style: preserve-3d;
+        }
+
+        .recipe-card:hover .recipe-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .recipe-front, .recipe-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        /* Recipe Front */
+        .recipe-front {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .recipe-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            background: var(--recipe-gradient, linear-gradient(135deg, #FF6B6B, #FFB347));
+        }
+
+        .recipe-image.has-photo {
+            background: #0a0a0a;
+        }
+
+        .recipe-image .recipe-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 0.6s ease, opacity 0.4s ease;
+        }
+
+        .recipe-card:hover .recipe-photo {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .recipe-image.has-photo .floating-cubes {
+            opacity: 0;
+        }
+
+        .recipe-image.has-photo .recipe-glass {
+            display: none;
+        }
+
+        .recipe-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%);
+            z-index: 2;
+        }
+
+        .recipe-glass {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 100px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            transition: transform 0.5s var(--transition-bounce);
+        }
+
+        .recipe-card:hover .recipe-glass {
+            transform: translateX(-50%) scale(1.1) translateY(-10px);
+        }
+
+        /* Floating cubes animation */
+        .floating-cubes {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .floating-cube {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 6px;
+            animation: cubeDrop 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .floating-cube:nth-child(1) { animation-delay: 0s; background: var(--cube-color-1, #FFB347); }
+        .floating-cube:nth-child(2) { animation-delay: 0.5s; background: var(--cube-color-2, #FF6B6B); }
+        .floating-cube:nth-child(3) { animation-delay: 1s; background: var(--cube-color-3, #9ACD32); }
+
+        @keyframes cubeDrop {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(80px) rotate(180deg); opacity: 0.6; }
+        }
+
+        .recipe-content {
+            padding: 25px;
+        }
+
+        .recipe-category-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            background: var(--tag-bg, rgba(255, 107, 107, 0.2));
+            color: var(--tag-color, #FF6B6B);
+        }
+
+        .recipe-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .recipe-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .recipe-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Recipe Back */
+        .recipe-back {
+            background: linear-gradient(135deg, var(--bg-card), #1a1a2e);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: rotateY(180deg);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-back h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            flex: 1;
+        }
+
+        .ingredients-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .ingredients-list li:hover {
+            color: var(--text-primary);
+            padding-left: 10px;
+        }
+
+        .ingredients-list li::before {
+            content: '🧊';
+            font-size: 1rem;
+        }
+
+        .trufud-cubes {
+            background: linear-gradient(135deg, var(--accent-green), #00B359);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .recipe-instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+        }
+
+        /* Liquid Fill Animation */
+        .liquid-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0%;
+            background: linear-gradient(180deg, transparent, var(--liquid-color, rgba(255, 107, 107, 0.3)));
+            transition: height 0.6s var(--transition-smooth);
+            border-radius: 0 0 24px 24px;
+        }
+
+        .recipe-card:hover .liquid-fill {
+            height: 100%;
+        }
+
+        /* Category-specific recipe colors */
+        .recipe-card[data-category="smoothies"] {
+            --recipe-gradient: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            --tag-bg: rgba(255, 107, 107, 0.2);
+            --tag-color: #FF6B6B;
+            --liquid-color: rgba(255, 107, 107, 0.15);
+        }
+
+        .recipe-card[data-category="cocktails"] {
+            --recipe-gradient: linear-gradient(135deg, #8B5CF6, #A78BFA);
+            --tag-bg: rgba(139, 92, 246, 0.2);
+            --tag-color: #A78BFA;
+            --liquid-color: rgba(139, 92, 246, 0.15);
+        }
+
+        .recipe-card[data-category="mocktails"] {
+            --recipe-gradient: linear-gradient(135deg, #06B6D4, #22D3EE);
+            --tag-bg: rgba(6, 182, 212, 0.2);
+            --tag-color: #22D3EE;
+            --liquid-color: rgba(6, 182, 212, 0.15);
+        }
+
+        .recipe-card[data-category="juices"] {
+            --recipe-gradient: linear-gradient(135deg, #F59E0B, #FBBF24);
+            --tag-bg: rgba(245, 158, 11, 0.2);
+            --tag-color: #FBBF24;
+            --liquid-color: rgba(245, 158, 11, 0.15);
+        }
+
+        .recipe-card[data-category="desserts"] {
+            --recipe-gradient: linear-gradient(135deg, #EC4899, #F472B6);
+            --tag-bg: rgba(236, 72, 153, 0.2);
+            --tag-color: #F472B6;
+            --liquid-color: rgba(236, 72, 153, 0.15);
+        }
+
+        .recipe-card[data-category="breakfast"] {
+            --recipe-gradient: linear-gradient(135deg, #10B981, #34D399);
+            --tag-bg: rgba(16, 185, 129, 0.2);
+            --tag-color: #34D399;
+            --liquid-color: rgba(16, 185, 129, 0.15);
+        }
+
+        /* Hidden cards animation */
+        .recipe-card.hidden {
+            display: none;
+        }
+
+        .recipe-card.show {
+            animation: recipeAppear 0.6s var(--transition-smooth) forwards;
+        }
+
+        @keyframes recipeAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Shake animation for cube icon */
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .recipe-card:hover .cube-icon {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        /* Recipes Mobile Responsive */
+        @media (max-width: 768px) {
+            .recipes-section {
+                padding: 80px 5%;
+            }
+
+            .recipe-categories {
+                gap: 8px;
+            }
+
+            .category-tab {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+
+            .recipes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .recipe-card {
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav">
+        <a href="#" class="logo">
+            <span class="logo-icon">🌱</span>
+            <span class="logo-text">TRUFUD</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#innovation">Innovation</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="product-showcase-grid">
+                <div class="showcase-product">
+                    <img src="ALPHONSO MANGO FRUIT PULP.png" alt="Mango">
+                </div>
+                <div class="showcase-product">
+                    <img src="avocado.png" alt="Avocado">
+                </div>
+                <div class="showcase-product">
+                    <img src="STRAWBERRY FRUIT PULP.png" alt="Strawberry">
+                </div>
+                <div class="showcase-product">
+                    <img src="PINEAPPLE FRUIT PULP.png" alt="Pineapple">
+                </div>
+                <div class="showcase-product">
+                    <img src="ORANGE PULP.png" alt="Orange">
+                </div>
+                <div class="showcase-product">
+                    <img src="GRAPE FRUIT PULP.png" alt="Grape">
+                </div>
+                <div class="showcase-product">
+                    <img src="PASSION FRUIT PULP.png" alt="Passion Fruit">
+                </div>
+                <div class="showcase-product">
+                    <img src="SAPOTA PULP.png" alt="Sapota">
+                </div>
+                <div class="showcase-product">
+                    <img src="TENDER COCONUT FRUIT PULP.png" alt="Tender Coconut">
+                </div>
+            </div>
+
+            <div class="hero-badge">True Innovation in Frozen Foods</div>
+
+            <h1>
+                Frozen Fruit Pulp
+                <span>Reinvented.</span>
+            </h1>
+
+            <p class="hero-tagline">
+                The world's first <strong>snap-off cube</strong> fruit pulp.<br>
+                Just break, drop, and enjoy fresh fruit flavor instantly.
+            </p>
+
+            <a href="#products" class="hero-cta">
+                Explore Flavors
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="scroll-indicator">
+            Scroll to discover
+        </div>
+    </section>
+
+    <!-- Innovation Section -->
+    <section class="innovation" id="innovation">
+        <div class="innovation-container">
+            <div class="innovation-header animate-on-scroll">
+                <span class="section-label">The Innovation</span>
+                <h2 class="section-title">Fruit Pulp, But Smarter</h2>
+            </div>
+
+            <div class="innovation-grid">
+                <div class="innovation-visual animate-on-scroll">
+                    <img src="cube_drop_hero.png" alt="Trufud Cube Innovation - Hand dropping frozen fruit cube into cocktail" class="innovation-image">
+                </div>
+
+                <div class="innovation-content">
+                    <h3 class="animate-on-scroll delay-1">Like an Ice Tray, But Delicious</h3>
+                    <p class="animate-on-scroll delay-2">
+                        We've reimagined frozen fruit pulp from the ground up. Instead of messy jars
+                        or wasteful single-use packs, Trufud comes in perfectly portioned cubes that
+                        you simply snap off and use.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li class="animate-on-scroll delay-3">
+                            <span class="feature-icon">✂️</span>
+                            <span>Snap off exactly what you need - no measuring required</span>
+                        </li>
+                        <li class="animate-on-scroll delay-4">
+                            <span class="feature-icon">🧊</span>
+                            <span>Each cube = one perfect portion for drinks or recipes</span>
+                        </li>
+                        <li class="animate-on-scroll delay-5">
+                            <span class="feature-icon">♻️</span>
+                            <span>Zero waste - rest stays frozen until you need it</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="how-container">
+            <div class="how-header animate-on-scroll">
+                <span class="section-label">Simple as 1-2-3</span>
+                <h2 class="section-title">How It Works</h2>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step animate-on-scroll delay-1">
+                    <div class="step-number">1</div>
+                    <span class="step-icon">📦</span>
+                    <h3>Open</h3>
+                    <p>Peel open the plastic pouch tray to reveal the frozen fruit pulp cubes inside.</p>
+                </div>
+
+                <div class="step animate-on-scroll delay-2">
+                    <div class="step-number">2</div>
+                    <span class="step-icon">✋</span>
+                    <h3>Snap</h3>
+                    <p>Break off one or more cubes as needed. Each cube is perfectly portioned for single use.</p>
+                </div>
+
+                <div class="step animate-on-scroll delay-3">
+                    <div class="step-number">3</div>
+                    <span class="step-icon">🥤</span>
+                    <h3>Blend & Enjoy</h3>
+                    <p>Drop into your smoothie, cocktail, or recipe. No thawing needed — 100% pure fruit flavor!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="products-header animate-on-scroll">
+            <span class="section-label">Our Range</span>
+            <h2 class="section-title">9 Exotic Flavors</h2>
+            <p class="products-subtitle">Swipe to explore our delicious collection</p>
+        </div>
+
+        <div class="products-scroll">
+            <div class="product-card mango animate-on-scroll">
+                <div class="product-badge">Popular</div>
+                <div class="product-image">
+                    <img src="ALPHONSO MANGO FRUIT PULP.png" alt="Alphonso Mango Fruit Pulp">
+                </div>
+                <h3 class="product-name">Alphonso Mango</h3>
+                <p class="product-desc">The king of mangoes, frozen at peak ripeness</p>
+            </div>
+
+            <div class="product-card avocado animate-on-scroll delay-1">
+                <div class="product-image">
+                    <img src="avocado.png" alt="Avocado Fruit Pulp">
+                </div>
+                <h3 class="product-name">Avocado</h3>
+                <p class="product-desc">Creamy, rich, perfect for smoothie bowls</p>
+            </div>
+
+            <div class="product-card strawberry animate-on-scroll delay-2">
+                <div class="product-badge">New</div>
+                <div class="product-image">
+                    <img src="STRAWBERRY FRUIT PULP.png" alt="Strawberry Fruit Pulp">
+                </div>
+                <h3 class="product-name">Strawberry</h3>
+                <p class="product-desc">Sweet berries bursting with flavor</p>
+            </div>
+
+            <div class="product-card pineapple animate-on-scroll delay-3">
+                <div class="product-image">
+                    <img src="PINEAPPLE FRUIT PULP.png" alt="Pineapple Fruit Pulp">
+                </div>
+                <h3 class="product-name">Pineapple</h3>
+                <p class="product-desc">Tropical sunshine in every cube</p>
+            </div>
+
+            <div class="product-card orange animate-on-scroll delay-4">
+                <div class="product-image">
+                    <img src="ORANGE PULP.png" alt="Orange Fruit Pulp">
+                </div>
+                <h3 class="product-name">Orange</h3>
+                <p class="product-desc">Zesty citrus freshness, always ready</p>
+            </div>
+
+            <div class="product-card grape animate-on-scroll delay-5">
+                <div class="product-image">
+                    <img src="GRAPE FRUIT PULP.png" alt="Grape Fruit Pulp">
+                </div>
+                <h3 class="product-name">Grape</h3>
+                <p class="product-desc">Deep, rich grape intensity</p>
+            </div>
+
+            <div class="product-card passion animate-on-scroll">
+                <div class="product-image">
+                    <img src="PASSION FRUIT PULP.png" alt="Passion Fruit Pulp">
+                </div>
+                <h3 class="product-name">Passion Fruit</h3>
+                <p class="product-desc">Exotic tang with aromatic notes</p>
+            </div>
+
+            <div class="product-card sapota animate-on-scroll delay-1">
+                <div class="product-image">
+                    <img src="SAPOTA PULP.png" alt="Sapota Fruit Pulp">
+                </div>
+                <h3 class="product-name">Sapota</h3>
+                <p class="product-desc">Caramel-sweet tropical delight</p>
+            </div>
+
+            <div class="product-card coconut animate-on-scroll delay-2">
+                <div class="product-image">
+                    <img src="TENDER COCONUT FRUIT PULP.png" alt="Tender Coconut Fruit Pulp">
+                </div>
+                <h3 class="product-name">Tender Coconut</h3>
+                <p class="product-desc">Refreshing island essence</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="benefits-container">
+            <div class="benefits-header animate-on-scroll">
+                <span class="section-label">Why Choose Us</span>
+                <h2 class="section-title">The Trufud Advantage</h2>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">🌱</div>
+                    <h3>100% Natural</h3>
+                    <p>Pure fruit, nothing else. No artificial colors or flavors.</p>
+                </div>
+
+                <div class="benefit-card animate-on-scroll delay-1">
+                    <div class="benefit-icon">🚫</div>
+                    <h3>No Preservatives</h3>
+                    <p>Flash-frozen to lock in freshness naturally.</p>
+                </div>
+
+                <div class="benefit-card animate-on-scroll delay-2">
+                    <div class="benefit-icon">📦</div>
+                    <h3>Zero Waste</h3>
+                    <p>Use only what you need, rest stays perfectly frozen.</p>
+                </div>
+
+                <div class="benefit-card animate-on-scroll delay-3">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Instant Ready</h3>
+                    <p>No thawing, no prep. Straight from freezer to glass.</p>
+                </div>
+
+                <div class="benefit-card animate-on-scroll delay-4">
+                    <div class="benefit-icon">📅</div>
+                    <h3>Long Shelf Life</h3>
+                    <p>Up to 24 months when kept frozen at -18°C.</p>
+                </div>
+
+                <div class="benefit-card animate-on-scroll delay-5">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Perfect Portions</h3>
+                    <p>Each cube is precisely measured for consistency.</p>
+                </div>
+
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Nutrient Rich</h3>
+                    <p>Flash-freezing preserves vitamins and minerals.</p>
+                </div>
+
+                <div class="benefit-card animate-on-scroll delay-1">
+                    <div class="benefit-icon">🍹</div>
+                    <h3>Versatile Use</h3>
+                    <p>Smoothies, cocktails, desserts, cooking - endless options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-content animate-on-scroll">
+            <h2>Ready to Transform Your Kitchen?</h2>
+            <p>Join thousands who've discovered the smarter way to enjoy fresh fruit.</p>
+            <div class="cta-buttons">
+                <a href="mailto:rohan@levezafoods.com" class="btn-primary">
+                    Get In Touch
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#products" class="btn-secondary">
+                    View All Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipes Section -->
+    <section class="recipes-section" id="recipes">
+        <div class="recipes-header">
+            <span class="section-tag animate-on-scroll">
+                <span>🍹</span> Recipe Lab
+            </span>
+            <h2 class="animate-on-scroll">Create Magic with Cubes</h2>
+            <p class="animate-on-scroll">From sunrise smoothies to sunset cocktails — endless possibilities with just a snap!</p>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="recipe-categories animate-on-scroll">
+            <button class="category-tab active" data-category="all">
+                <span>✨ All Recipes</span>
+            </button>
+            <button class="category-tab" data-category="smoothies">
+                <span>🥤 Smoothies</span>
+            </button>
+            <button class="category-tab" data-category="cocktails">
+                <span>🍸 Cocktails</span>
+            </button>
+            <button class="category-tab" data-category="mocktails">
+                <span>🧊 Mocktails</span>
+            </button>
+            <button class="category-tab" data-category="juices">
+                <span>🍊 Fresh Juices</span>
+            </button>
+            <button class="category-tab" data-category="desserts">
+                <span>🍮 Desserts</span>
+            </button>
+            <button class="category-tab" data-category="breakfast">
+                <span>🥣 Breakfast</span>
+            </button>
+            <button class="category-tab" data-category="healthy">
+                <span>🥗 Healthy</span>
+            </button>
+        </div>
+
+        <!-- Recipe Grid -->
+        <div class="recipes-grid">
+
+            <!-- SMOOTHIES -->
+            <div class="recipe-card show" data-category="smoothies">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo">
+                            <img src="tropical_smoothie.png" alt="Tropical Sunrise Smoothie" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥤</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Smoothie</span>
+                            <h3 class="recipe-title">Tropical Sunrise</h3>
+                            <p class="recipe-description">A vibrant blend of mango, pineapple and passion fruit that tastes like paradise.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 2 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Mango</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">1x Passion Fruit</span> Trufud Cube</li>
+                            <li>1 cup coconut milk</li>
+                            <li>1 tbsp honey</li>
+                            <li>Ice cubes</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Drop cubes directly into blender. Add coconut milk and honey. Blend until smooth!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="smoothies">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #9ACD32; --cube-color-2: #6B8E23; --cube-color-3: #FFB347;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥬</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Smoothie</span>
+                            <h3 class="recipe-title">Green Goddess</h3>
+                            <p class="recipe-description">Creamy avocado meets sweet mango for the ultimate health booster.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 3 mins</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Avocado</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Mango</span> Trufud Cubes</li>
+                            <li>1 cup almond milk</li>
+                            <li>1 handful spinach</li>
+                            <li>1 tbsp chia seeds</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Combine all ingredients. Blend on high for 60 seconds until silky smooth!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="smoothies">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #FF6B6B; --cube-color-2: #EE4B4B; --cube-color-3: #F5F5DC;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🍓</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Smoothie</span>
+                            <h3 class="recipe-title">Berry Coconut Dream</h3>
+                            <p class="recipe-description">Luscious strawberry and tender coconut create a creamy tropical escape.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 2 mins</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Strawberry</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Tender Coconut</span> Trufud Cubes</li>
+                            <li>1 cup Greek yogurt</li>
+                            <li>1 tbsp vanilla extract</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Drop frozen cubes, add yogurt and vanilla. Blend until thick and creamy!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COCKTAILS -->
+            <div class="recipe-card show" data-category="cocktails">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo">
+                            <img src="mango_margarita_anime.png" alt="Mango Margarita Cocktail" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🍹</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Cocktail</span>
+                            <h3 class="recipe-title">Mango Margarita</h3>
+                            <p class="recipe-description">A frozen twist on the classic with pure mango goodness.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 3 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">3x Mango</span> Trufud Cubes</li>
+                            <li>2 oz tequila</li>
+                            <li>1 oz triple sec</li>
+                            <li>1 oz fresh lime juice</li>
+                            <li>Tajín rim</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Shake & Serve:</strong> Blend cubes with spirits, strain into rimmed glass. Garnish with lime!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="cocktails">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo">
+                            <img src="passion_martini_anime.png" alt="Passion Fruit Martini" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥃</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Cocktail</span>
+                            <h3 class="recipe-title">Passion Fruit Martini</h3>
+                            <p class="recipe-description">Elegant and exotic — the star of any cocktail party.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 4 mins</span>
+                                <span>🧊 2 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Passion Fruit</span> Trufud Cubes</li>
+                            <li>2 oz vodka</li>
+                            <li>1 oz Passoa liqueur</li>
+                            <li>0.5 oz vanilla syrup</li>
+                            <li>Prosecco float</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Shake:</strong> Muddle cubes, shake with vodka and Passoa. Strain and top with prosecco!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="cocktails">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo" style="--cube-color-1: #8B5CF6; --cube-color-2: #7C3AED; --cube-color-3: #FF6B6B;">
+                            <img src="grape_sangria_anime.png" alt="Grape Sangria Slush" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🍷</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Cocktail</span>
+                            <h3 class="recipe-title">Grape Sangria Slush</h3>
+                            <p class="recipe-description">Frozen wine meets grape cubes for a refreshing summer sipper.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 5 mins</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">4x Grape</span> Trufud Cubes</li>
+                            <li>1 cup red wine (frozen)</li>
+                            <li>1 oz brandy</li>
+                            <li>Fresh mint</li>
+                            <li>Orange slices</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Freeze wine in cubes, blend with grape cubes and brandy. Garnish with orange!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOCKTAILS -->
+            <div class="recipe-card show" data-category="mocktails">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo">
+                            <img src="pineapple_mocktail.png" alt="Pineapple Fizz Mocktail" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🧋</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Mocktail</span>
+                            <h3 class="recipe-title">Pineapple Fizz</h3>
+                            <p class="recipe-description">Sparkling, tangy, and totally refreshing — zero alcohol, max flavor!</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 2 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">3x Pineapple</span> Trufud Cubes</li>
+                            <li>Sparkling water</li>
+                            <li>Fresh mint leaves</li>
+                            <li>1 tbsp agave syrup</li>
+                            <li>Lime wedge</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Build:</strong> Drop cubes in glass, muddle lightly. Top with sparkling water and mint!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="mocktails">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #FF7F50; --cube-color-2: #FF6347; --cube-color-3: #F5F5DC;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🍊</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Mocktail</span>
+                            <h3 class="recipe-title">Orange Coconut Cooler</h3>
+                            <p class="recipe-description">Creamy coconut meets zesty orange in this beach-perfect drink.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 3 mins</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Orange</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Tender Coconut</span> Trufud Cubes</li>
+                            <li>Coconut cream</li>
+                            <li>Soda water</li>
+                            <li>Orange zest garnish</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Layer:</strong> Blend cubes with coconut cream. Pour over ice, top with soda!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="mocktails">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #FF6B6B; --cube-color-2: #FFB347; --cube-color-3: #8B5CF6;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥤</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Mocktail</span>
+                            <h3 class="recipe-title">Sunset Splash</h3>
+                            <p class="recipe-description">A layered masterpiece with strawberry, mango, and grape.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 5 mins</span>
+                                <span>🧊 6 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Strawberry</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Mango</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Grape</span> Trufud Cubes</li>
+                            <li>Ginger ale</li>
+                            <li>Grenadine syrup</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Layer:</strong> Blend each flavor separately. Layer grape, mango, then strawberry for sunset effect!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JUICES -->
+            <div class="recipe-card show" data-category="juices">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #FF7F50; --cube-color-2: #FFB347; --cube-color-3: #FF6347;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🧃</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Fresh Juice</span>
+                            <h3 class="recipe-title">Citrus Blast</h3>
+                            <p class="recipe-description">Orange meets pineapple for an immunity-boosting powerhouse.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 1 min</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Orange</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Pineapple</span> Trufud Cubes</li>
+                            <li>1 cup cold water</li>
+                            <li>Fresh ginger (optional)</li>
+                            <li>Ice cubes</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Simply blend all ingredients. Strain if preferred, or enjoy pulpy!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="juices">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #D2691E; --cube-color-2: #A0522D; --cube-color-3: #FFB347;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥛</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Fresh Juice</span>
+                            <h3 class="recipe-title">Sapota Shake</h3>
+                            <p class="recipe-description">Creamy, caramel-like sapota in a quick refreshing shake.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 2 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">3x Sapota</span> Trufud Cubes</li>
+                            <li>1 cup cold milk</li>
+                            <li>1 tbsp jaggery/honey</li>
+                            <li>Pinch of cardamom</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Combine all in blender. Blend until smooth and frothy!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="juices">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo" style="--cube-color-1: #FFE135; --cube-color-2: #F5F5DC; --cube-color-3: #87CEEB;">
+                            <img src="tropical_detox_juice.png" alt="Tropical Detox Juice" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥥</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Fresh Juice</span>
+                            <h3 class="recipe-title">Tropical Detox</h3>
+                            <p class="recipe-description">Light, hydrating blend of pineapple and tender coconut for a refreshing cleanse.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 2 mins</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Pineapple</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Tender Coconut</span> Trufud Cubes</li>
+                            <li>1 cup cold water</li>
+                            <li>Fresh mint leaves</li>
+                            <li>Pinch of black salt</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Process cubes with water. Add mint and black salt. Strain and serve chilled!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESSERTS -->
+            <div class="recipe-card show" data-category="desserts">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #FFB347; --cube-color-2: #FF8C00; --cube-color-3: #FBBF24;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🍮</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Dessert</span>
+                            <h3 class="recipe-title">Mango Panna Cotta</h3>
+                            <p class="recipe-description">Silky Italian dessert meets tropical mango perfection.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 15 mins + set</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">4x Mango</span> Trufud Cubes</li>
+                            <li>1 cup heavy cream</li>
+                            <li>2 tsp gelatin</li>
+                            <li>3 tbsp sugar</li>
+                            <li>Vanilla extract</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Set:</strong> Blend cubes with cream, add bloomed gelatin. Pour in molds, chill 4 hours!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="desserts">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo">
+                            <img src="strawberry_mousse.png" alt="Strawberry Mousse Dessert" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🍨</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Dessert</span>
+                            <h3 class="recipe-title">Strawberry Mousse</h3>
+                            <p class="recipe-description">Light, airy, and bursting with fresh strawberry flavor.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 20 mins + chill</span>
+                                <span>🧊 5 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">5x Strawberry</span> Trufud Cubes</li>
+                            <li>1 cup whipping cream</li>
+                            <li>2 egg whites</li>
+                            <li>4 tbsp powdered sugar</li>
+                            <li>Dark chocolate shavings</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Fold:</strong> Puree cubes, fold into whipped cream & egg whites. Chill and top with chocolate!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="desserts">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #9ACD32; --cube-color-2: #6B8E23; --cube-color-3: #D2691E;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🍦</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Dessert</span>
+                            <h3 class="recipe-title">Avocado Chocolate Pudding</h3>
+                            <p class="recipe-description">Secretly healthy, sinfully delicious chocolate pudding.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 10 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">3x Avocado</span> Trufud Cubes</li>
+                            <li>3 tbsp cocoa powder</li>
+                            <li>3 tbsp maple syrup</li>
+                            <li>1/4 cup almond milk</li>
+                            <li>Pinch of sea salt</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Process all until silky smooth. Chill 30 mins. Top with berries!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BREAKFAST -->
+            <div class="recipe-card show" data-category="breakfast">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #10B981; --cube-color-2: #34D399; --cube-color-3: #FFB347;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥣</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Breakfast</span>
+                            <h3 class="recipe-title">Mango Overnight Oats</h3>
+                            <p class="recipe-description">Prep tonight, grab and go tomorrow — tropical breakfast bliss!</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 5 mins + overnight</span>
+                                <span>🧊 2 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Mango</span> Trufud Cubes</li>
+                            <li>1/2 cup rolled oats</li>
+                            <li>1/2 cup Greek yogurt</li>
+                            <li>1/2 cup milk</li>
+                            <li>1 tbsp chia seeds</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Layer:</strong> Mix oats, yogurt, milk, chia. Drop in cubes. Refrigerate overnight!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="breakfast">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo">
+                            <img src="acai_bowl.png" alt="Açaí Power Bowl" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🫐</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Breakfast</span>
+                            <h3 class="recipe-title">Açaí Power Bowl</h3>
+                            <p class="recipe-description">Instagram-worthy superfood bowl loaded with toppings.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 5 mins</span>
+                                <span>🧊 5 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Strawberry</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Grape</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">1x Avocado</span> Trufud Cube</li>
+                            <li>1/2 frozen banana</li>
+                            <li>Granola, coconut, honey</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend thick:</strong> Process cubes with banana. Pour in bowl, add toppings artfully!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="breakfast">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image" style="--cube-color-1: #F5F5DC; --cube-color-2: #D4D4AA; --cube-color-3: #FF9F43;">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥞</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Breakfast</span>
+                            <h3 class="recipe-title">Coconut Pancake Topping</h3>
+                            <p class="recipe-description">Upgrade your pancakes with instant tropical compote.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 3 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Tender Coconut</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">1x Passion Fruit</span> Trufud Cube</li>
+                            <li>2 tbsp butter</li>
+                            <li>1 tbsp brown sugar</li>
+                            <li>Your favorite pancakes</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Simmer:</strong> Melt butter, add cubes and sugar. Cook 2 mins until saucy. Pour over pancakes!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Healthy Recipes -->
+            <div class="recipe-card show" data-category="healthy">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo" style="--cube-color-1: #90EE90; --cube-color-2: #228B22; --cube-color-3: #FFD700;">
+                            <img src="green_detox_smoothie.png" alt="Green Detox Smoothie" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥬</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Healthy</span>
+                            <h3 class="recipe-title">Green Detox Smoothie</h3>
+                            <p class="recipe-description">Nutrient-packed blend of avocado, spinach, and mango for a healthy glow.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 3 mins</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Avocado</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Mango</span> Trufud Cubes</li>
+                            <li>1 cup fresh spinach</li>
+                            <li>1 cup almond milk</li>
+                            <li>1 tbsp chia seeds</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Process all ingredients until silky smooth. Add ice for extra chill. Energize your day!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="healthy">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo" style="--cube-color-1: #FFA500; --cube-color-2: #FFD700; --cube-color-3: #F0E68C;">
+                            <img src="immunity_boost_shot.png" alt="Immunity Boost Shot" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">💪</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Healthy</span>
+                            <h3 class="recipe-title">Immunity Boost Shot</h3>
+                            <p class="recipe-description">Powerful citrus shot with ginger kick to strengthen your immune system.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 2 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Orange</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">1x Pineapple</span> Trufud Cube</li>
+                            <li>1-inch fresh ginger</li>
+                            <li>½ tsp turmeric</li>
+                            <li>Pinch of black pepper</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Process cubes with ginger. Add turmeric and pepper. Strain and drink as a shot!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="healthy">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo" style="--cube-color-1: #FF69B4; --cube-color-2: #8B008B; --cube-color-3: #DDA0DD;">
+                            <img src="berry_bowl.png" alt="Low-Calorie Berry Bowl" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🫐</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Healthy</span>
+                            <h3 class="recipe-title">Low-Calorie Berry Bowl</h3>
+                            <p class="recipe-description">Light, antioxidant-rich bowl with strawberry and grape for guilt-free indulgence.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 4 mins</span>
+                                <span>🧊 4 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Strawberry</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">2x Grape</span> Trufud Cubes</li>
+                            <li>½ cup Greek yogurt (low-fat)</li>
+                            <li>1 tbsp honey</li>
+                            <li>Fresh berries for topping</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Blend:</strong> Process cubes with yogurt. Pour into bowl. Top with berries and honey drizzle!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card show" data-category="healthy">
+                <div class="recipe-card-inner">
+                    <div class="recipe-front">
+                        <div class="recipe-image has-photo" style="--cube-color-1: #F5F5DC; --cube-color-2: #FFB347; --cube-color-3: #98FB98;">
+                            <img src="coconut_refresher.png" alt="Coconut Water Refresher" class="recipe-photo">
+                            <div class="floating-cubes">
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                                <div class="floating-cube"></div>
+                            </div>
+                            <span class="recipe-glass">🥥</span>
+                        </div>
+                        <div class="liquid-fill"></div>
+                        <div class="recipe-content">
+                            <span class="recipe-category-tag">Healthy</span>
+                            <h3 class="recipe-title">Coconut Water Refresher</h3>
+                            <p class="recipe-description">Natural electrolyte drink with tender coconut and passion fruit.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 2 mins</span>
+                                <span>🧊 3 cubes</span>
+                            </div>
+                        </div>
+                        <span class="flip-hint">↻ Flip for recipe</span>
+                    </div>
+                    <div class="recipe-back">
+                        <h4>🧊 Ingredients</h4>
+                        <ul class="ingredients-list">
+                            <li><span class="trufud-cubes">2x Tender Coconut</span> Trufud Cubes</li>
+                            <li><span class="trufud-cubes">1x Passion Fruit</span> Trufud Cube</li>
+                            <li>1 cup coconut water</li>
+                            <li>Fresh mint leaves</li>
+                            <li>Lime wedge</li>
+                        </ul>
+                        <div class="recipe-instructions">
+                            <strong>Mix:</strong> Blend cubes with coconut water. Add mint and squeeze of lime. Ultimate hydration!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-icon">🌱</span>
+                <span class="logo-text">TRUFUD</span>
+            </div>
+
+            <ul class="footer-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#innovation">Our Story</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Facebook">👤</a>
+                <a href="#" aria-label="LinkedIn">💼</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Leveza Foods Pvt. Ltd. All rights reserved. | FSSAI: 11323999000246</p>
+            <p style="margin-top: 8px;">True Innovation • Convenient Cubes • Ready to Use</p>
+        </div>
+    </footer>
+
+    <!-- Minimal JavaScript for scroll animations -->
+    <script>
+        // Navbar scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Products horizontal scroll drag
+        const productsScroll = document.querySelector('.products-scroll');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        productsScroll.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - productsScroll.offsetLeft;
+            scrollLeft = productsScroll.scrollLeft;
+        });
+
+        productsScroll.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        productsScroll.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        productsScroll.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - productsScroll.offsetLeft;
+            const walk = (x - startX) * 2;
+            productsScroll.scrollLeft = scrollLeft - walk;
+        });
+
+        // Recipe Category Filtering
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const recipeCards = document.querySelectorAll('.recipe-card');
+
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                const category = tab.dataset.category;
+
+                recipeCards.forEach((card, index) => {
+                    // Reset animation
+                    card.classList.remove('show');
+
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.classList.remove('hidden');
+                        // Stagger animation
+                        setTimeout(() => {
+                            card.classList.add('show');
+                        }, index * 50);
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Add Recipes link to navigation
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks) {
+            const recipesLink = document.createElement('li');
+            recipesLink.innerHTML = '<a href="#recipes">Recipes</a>';
+            navLinks.insertBefore(recipesLink, navLinks.children[2]);
+        }
+    </script>
+</body>
+</html>
